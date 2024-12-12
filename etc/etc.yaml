@@ -1,0 +1,26 @@
+APP: integrated-exporter
+
+syntax: ${SYNTAX_ENV}
+
+server:
+  httpServices:
+    - name: http1
+      address: http://127.0.0.1
+    - name: http2
+      address: http://127.0.0.2
+  rpcServices:
+    - name: helloRpc
+      address: 127.0.0.1:8000
+      token: Basic YWRtaW46YWRtaW4=
+      rpcMethod: hellopb.hello/SayHello
+      body: '{"message": "hello"}'
+      response: YWRtaW46YWRtaW4
+  gethServices:
+    - name: gethdev
+      address: http://34.226.211.254:6060/debug/metrics/prometheus
+      token: Bearer 123456
+  apiServices:
+    - name: portal
+      address: http://100.27.68.168:6060/metrics
+      token: Bearer 123456
+
