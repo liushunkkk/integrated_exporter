@@ -27,5 +27,8 @@
 go.work
 go.work.sum
 
+# built binary file
+integrated_exporter
+
 # env file
 #.env
