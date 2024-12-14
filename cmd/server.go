@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"integrated-exporter/config"
-	"integrated-exporter/internal/server"
 	"time"
 
 	"github.com/spf13/cobra"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/internal/server"
 )
 
 // serverCmd represents the server command

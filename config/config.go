@@ -8,9 +8,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-var (
-	EnvPrefix string
-)
+var EnvPrefix string
 
 // C global command flags
 var C = &Config{}

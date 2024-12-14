@@ -18,8 +18,8 @@ func NewIHistogram(key string, histogram prometheus.Histogram) *IHistogram {
 
 func NewRecommendIHistogramOpts(opts *IOpts) *IHistogramOpts {
 	return &IHistogramOpts{
-		opts,
-		prometheus.DefBuckets,
+		IOpts:   opts,
+		Buckets: prometheus.DefBuckets,
 	}
 }
 

@@ -2,15 +2,15 @@ package proberx
 
 import (
 	"bytes"
-	"errors"
 	"fmt"
-	"integrated-exporter/config"
-	"integrated-exporter/pkg/constantx"
 	"io"
 	"log"
 	"net/http"
 	"strings"
 	"time"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
 func ProbeHttp(hs config.HttpService) error {
@@ -50,7 +50,7 @@ func ProbeHttp(hs config.HttpService) error {
 	}
 	if hs.Response != "" {
 		if !strings.Contains(string(body), hs.Response) {
-			return errors.New(fmt.Sprintf("%s %s probe response does not contain %s", constantx.HttpService, hs.Name, hs.Response))
+			return fmt.Errorf("%s %s probe response does not contain %s", constantx.HttpService, hs.Name, hs.Response)
 		}
 	}
 	return nil

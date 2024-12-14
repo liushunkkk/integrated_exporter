@@ -3,13 +3,15 @@ package server
 import (
 	"bytes"
 	"fmt"
-	"github.com/prometheus/client_golang/prometheus"
-	"integrated-exporter/config"
-	"integrated-exporter/pkg/constantx"
-	"integrated-exporter/pkg/metricx"
-	"integrated-exporter/pkg/proberx"
 	"log"
 	"sync"
+
+	"github.com/prometheus/client_golang/prometheus"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
+	"github.com/liushun-ing/integrated_exporter/pkg/metricx"
+	"github.com/liushun-ing/integrated_exporter/pkg/proberx"
 )
 
 func probeServices(serverConfig config.ServerConfig) {

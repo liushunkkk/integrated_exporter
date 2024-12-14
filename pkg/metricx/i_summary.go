@@ -18,17 +18,17 @@ func NewISummary(key string, summary prometheus.Summary) *ISummary {
 
 func NewRecommendISummaryOpts(opts *IOpts) *ISummaryOpts {
 	return &ISummaryOpts{
-		opts,
-		map[float64]float64{
+		IOpts: opts,
+		Objectives: map[float64]float64{
 			0.5:  0.05,  // 中位数，误差 ±5%
 			0.75: 0.02,  // 75th 分位数，误差 ±2%
 			0.9:  0.01,  // 90th 分位数，误差 ±1%
 			0.95: 0.005, // 95th 分位数，误差 ±0.5%
 			0.99: 0.001, // 99th 分位数，误差 ±0.1%
 		},
-		prometheus.DefMaxAge,
-		prometheus.DefAgeBuckets,
-		prometheus.DefBufCap,
+		MaxAge:     prometheus.DefMaxAge,
+		AgeBuckets: prometheus.DefAgeBuckets,
+		BufCap:     prometheus.DefBufCap,
 	}
 }
 

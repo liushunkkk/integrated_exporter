@@ -1,8 +1,9 @@
 package metricx
 
 import (
-	"github.com/prometheus/client_golang/prometheus"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus"
 )
 
 type IOpts struct {
@@ -10,7 +11,8 @@ type IOpts struct {
 	// name of the Metric (created by joining these components with
 	// "_").
 	Namespace string
-	Name      string
+
+	Name string
 
 	// Help provides information about this metric.
 	//

@@ -1,9 +1,10 @@
 package metricx
 
 import (
+	"testing"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestIRegistry(t *testing.T) {

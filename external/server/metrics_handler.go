@@ -3,14 +3,12 @@ package server
 import (
 	"bytes"
 	"compress/gzip"
-	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
-var (
-	DefaultMetricsHandler = NewMetricsHandler()
-)
+var DefaultMetricsHandler = NewMetricsHandler()
 
 type MetricsHandler struct {
 	OldMetricsBuffer []*bytes.Buffer
@@ -65,7 +63,7 @@ func (mh *MetricsHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	// 不支持 Gzip 时，直接返回数据
 	w.Header().Set("Content-Type", "text/plain; version=0.0.4")
-	w.Header().Set("Content-Length", fmt.Sprintf("%d", result.Len()))
+	w.Header().Set("Content-Length", strconv.Itoa(result.Len()))
 	w.WriteHeader(http.StatusOK)
 	if _, err := w.Write(result.Bytes()); err != nil {
 		log.Println("Error writing response:", err)

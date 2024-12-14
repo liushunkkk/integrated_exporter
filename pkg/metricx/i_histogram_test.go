@@ -1,18 +1,19 @@
 package metricx
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIHistogram(t *testing.T) {
 	opts := &IHistogramOpts{
-		&IOpts{
+		IOpts: &IOpts{
 			Namespace: "aaa",
 			Name:      "test_histogram",
 			Labels:    map[string]string{"instance": "localhost"},
 		},
-		[]float64{10, 20, 30, 40},
+		Buckets: []float64{10, 20, 30, 40},
 	}
 
 	histogram := GetOrRegisterIHistogram(opts, nil)

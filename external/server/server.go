@@ -2,11 +2,12 @@ package server
 
 import (
 	"fmt"
-	"integrated-exporter/config"
-	"integrated-exporter/pkg/metricx"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/metricx"
 )
 
 // Run start the integrated exporter. If registry or handler is nil, it uses the default one.
@@ -26,11 +27,8 @@ func Run(config config.ServerConfig, registry *metricx.IRegistry, handler *Metri
 
 	go func() {
 		collect(config, registry, handler)
-		for {
-			select {
-			case <-ticker.C:
-				collect(config, registry, handler)
-			}
+		for range ticker.C {
+			collect(config, registry, handler)
 		}
 	}()
 

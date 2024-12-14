@@ -1,12 +1,13 @@
 package proberx
 
 import (
-	"integrated-exporter/config"
-	"integrated-exporter/pkg/constantx"
 	"io"
 	"log"
 	"net/http"
 	"time"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
 func ProbeGeth(gs config.GethService) ([]byte, error) {

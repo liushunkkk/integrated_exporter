@@ -30,7 +30,6 @@ var gendocsCmd = &cobra.Command{
 }
 
 func init() {
-
 	gendocsCmd.PersistentFlags().StringP("type", "t", "md", "docs type, support [md|man|yaml|rest]")
 
 	rootCmd.AddCommand(gendocsCmd)

@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"integrated-exporter/config"
 
 	"github.com/spf13/cobra"
+
+	"github.com/liushun-ing/integrated_exporter/config"
 )
 
 var versionCmd = &cobra.Command{

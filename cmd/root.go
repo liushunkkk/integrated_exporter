@@ -3,7 +3,6 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	"integrated-exporter/config"
 	"os"
 	"path"
 
@@ -13,6 +12,8 @@ import (
 	"github.com/spf13/pflag"
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v3"
+
+	"github.com/liushun-ing/integrated_exporter/config"
 )
 
 var (
@@ -21,7 +22,7 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "integrated-exporter",
+	Use:   "github.com/liushun-ing/integrated_exporter",
 	Short: "Short description of integrated-exporter",
 	Long:  `Long description of integrated-exporter`,
 }
@@ -57,7 +58,7 @@ func initEnv() {
 	content, err := os.ReadFile(envPath)
 	cobra.CheckErr(err)
 
-	var envs map[string]interface{}
+	var envs map[string]any
 	err = yaml.Unmarshal(content, &envs)
 	cobra.CheckErr(err)
 
@@ -77,10 +78,10 @@ func initConfig() {
 		return
 	}
 
-	c, err := envsubst.ReadFile(cfgFile)
+	c, _ := envsubst.ReadFile(cfgFile)
 
 	var cs map[string]any
-	err = yaml.Unmarshal(c, &cs)
+	err := yaml.Unmarshal(c, &cs)
 	cobra.CheckErr(err)
 
 	err = viper.MergeConfigMap(cs)
@@ -96,7 +97,7 @@ func initConfig() {
 func traverseBindViperFlags(prefix string, command *cobra.Command) {
 	bindViperFlags(prefix, command)
 	for _, childCommand := range command.Commands() {
-		tp := ""
+		var tp string
 		if prefix == "" {
 			tp = childCommand.Name()
 		} else {

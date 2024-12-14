@@ -3,9 +3,10 @@ package metricx
 import (
 	"bytes"
 	"fmt"
+	"sync"
+
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/expfmt"
-	"sync"
 )
 
 // DuplicateMetric is the error returned by IRegistry. Register when a metric
@@ -22,9 +23,7 @@ type IRegistry struct {
 	metrics  sync.Map
 }
 
-var (
-	DefaultIRegistry = NewIRegistry()
-)
+var DefaultIRegistry = NewIRegistry()
 
 func NewIRegistry() *IRegistry {
 	return &IRegistry{
@@ -34,7 +33,7 @@ func NewIRegistry() *IRegistry {
 }
 
 // GetOrRegister gets an existing metric or creates and registers a new one.
-func (ir *IRegistry) GetOrRegister(im IMetric) interface{} {
+func (ir *IRegistry) GetOrRegister(im IMetric) any {
 	if ret, loaded := ir.metrics.LoadOrStore(im.GetKey(), im); loaded {
 		return ret
 	}

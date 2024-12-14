@@ -3,18 +3,19 @@ package proberx
 import (
 	"bytes"
 	"context"
-	"errors"
 	"fmt"
+	"log"
+	"strings"
+	"time"
+
 	"github.com/fullstorydev/grpcurl"
 	"github.com/jhump/protoreflect/grpcreflect"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
-	"integrated-exporter/config"
-	"integrated-exporter/pkg/constantx"
-	"log"
-	"strings"
-	"time"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
 func ProbeRpc(rs config.RpcService) error {
@@ -54,7 +55,7 @@ func ProbeRpc(rs config.RpcService) error {
 
 	if rs.Response != "" {
 		if !strings.Contains(resp.String(), rs.Response) {
-			return errors.New(fmt.Sprintf("%s %s probe response does not contain %s", constantx.RpcService, rs.Name, rs.Response))
+			return fmt.Errorf("%s %s probe response does not contain %s", constantx.RpcService, rs.Name, rs.Response)
 		}
 	}
 	return nil
