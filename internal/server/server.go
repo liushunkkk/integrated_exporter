@@ -3,16 +3,18 @@ package server
 import (
 	"fmt"
 	"integrated-exporter/config"
+	"integrated-exporter/pkg/metricx"
 	"log"
 	"net/http"
 	"time"
 )
 
 func Run(serverConfig config.ServerConfig) error {
-	_ = NewMetricsRegistry()
-	_ = NewMetricsHandler()
-
-	ticker := time.NewTicker(5 * time.Second)
+	interval, err := time.ParseDuration(serverConfig.Interval)
+	if err != nil {
+		return fmt.Errorf("failed to parse interval: %s", err)
+	}
+	ticker := time.NewTicker(interval)
 	defer ticker.Stop()
 
 	go func() {
@@ -26,10 +28,10 @@ func Run(serverConfig config.ServerConfig) error {
 	}()
 
 	//http.Handle("/metrics", promhttp.HandlerFor(Reg, promhttp.HandlerOpts{Registry: Reg}))
-	http.Handle("/metrics", metricsHandler)
+	http.Handle(serverConfig.Route, DefaultMetricsHandler)
 
 	log.Printf("export /metrics on port :%v", serverConfig.Port)
-	err := http.ListenAndServe(fmt.Sprintf(":%v", serverConfig.Port), nil)
+	err = http.ListenAndServe(fmt.Sprintf(":%v", serverConfig.Port), nil)
 	if err != nil {
 		return err
 	}
@@ -37,10 +39,10 @@ func Run(serverConfig config.ServerConfig) error {
 }
 
 func collect(serverConfig config.ServerConfig) {
-	metricsHandler.ClearBuffer()
+	DefaultMetricsHandler.ClearBuffer()
 	probeServices(serverConfig)
-	metricsText, err := GetMetricsText()
+	metricsText, err := metricx.ExportDefaultIRegistryMetrics()
 	if err == nil {
-		metricsHandler.AddBuffer(metricsText)
+		DefaultMetricsHandler.AddBuffer(metricsText)
 	}
 }

@@ -1,4 +1,4 @@
-package server
+package proberx
 
 import (
 	"bytes"
@@ -11,20 +11,26 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 	"integrated-exporter/config"
+	"integrated-exporter/pkg/constantx"
 	"log"
 	"strings"
 	"time"
 )
 
-func probeRpc(rs config.RpcService) error {
+func ProbeRpc(rs config.RpcService) error {
+	timeout, err := time.ParseDuration(rs.Timeout)
+	if err != nil {
+		log.Printf("Failed to parse timeout duration for probe %s %v: %v", constantx.RpcService, rs.Name, err)
+		return err
+	}
 	client, err := grpc.NewClient(rs.Address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Printf("Failed to connect to server for %s %v: %v", RpcService, rs.Name, err)
+		log.Printf("Failed to connect to server for %s %v: %v", constantx.RpcService, rs.Name, err)
 		return err
 	}
 	defer client.Close()
 
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
 	defer cancel()
 	md := metadata.New(nil)
 	md.Append("Authorization", rs.Token)
@@ -42,13 +48,13 @@ func probeRpc(rs config.RpcService) error {
 	next := grpcurl.NewJSONRequestParser(bytes.NewBuffer([]byte(rs.Body)), resolver).Next
 	err = grpcurl.InvokeRPC(ctx, descriptorSource, client, rs.RpcMethod, []string{auth}, &handler, next)
 	if err != nil {
-		log.Printf("Failed to invoke method for %v %v: %v", RpcService, rs.Name, err)
+		log.Printf("Failed to invoke method for %v %v: %v", constantx.RpcService, rs.Name, err)
 		return err
 	}
 
 	if rs.Response != "" {
 		if !strings.Contains(resp.String(), rs.Response) {
-			return errors.New(fmt.Sprintf("%s %s probe response does not contain %s", RpcService, rs.Name, rs.Response))
+			return errors.New(fmt.Sprintf("%s %s probe response does not contain %s", constantx.RpcService, rs.Name, rs.Response))
 		}
 	}
 	return nil

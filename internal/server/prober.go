@@ -5,15 +5,11 @@ import (
 	"fmt"
 	"github.com/prometheus/client_golang/prometheus"
 	"integrated-exporter/config"
+	"integrated-exporter/pkg/constantx"
+	"integrated-exporter/pkg/metricx"
+	"integrated-exporter/pkg/proberx"
 	"log"
 	"sync"
-)
-
-const (
-	HttpService = "http"
-	RpcService  = "rpc"
-	GethService = "geth"
-	ApiService  = "api"
 )
 
 func probeServices(serverConfig config.ServerConfig) {
@@ -22,45 +18,45 @@ func probeServices(serverConfig config.ServerConfig) {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			err := probeHttp(hs)
-			saveLiveGauge(HttpService, hs.Name, err)
+			err := proberx.ProbeHttp(hs)
+			saveLiveGauge(constantx.HttpService, hs.Name, err)
 		}()
 	}
 	for _, rs := range serverConfig.RpcServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			err := probeRpc(rs)
-			saveLiveGauge(RpcService, rs.Name, err)
+			err := proberx.ProbeRpc(rs)
+			saveLiveGauge(constantx.RpcService, rs.Name, err)
 		}()
 	}
 	for _, gs := range serverConfig.GethServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			resp, err := probeGeth(gs)
-			saveLiveGauge(GethService, gs.Name, err)
-			saveServiceMetrics(GethService, gs.Name, resp)
+			resp, err := proberx.ProbeGeth(gs)
+			saveLiveGauge(constantx.GethService, gs.Name, err)
+			saveServiceMetrics(constantx.GethService, gs.Name, resp)
 		}()
 	}
 	for _, as := range serverConfig.ApiServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			resp, err := probeApi(as)
-			saveLiveGauge(ApiService, as.Name, err)
-			saveServiceMetrics(ApiService, as.Name, resp)
+			resp, err := proberx.ProbeApi(as)
+			saveLiveGauge(constantx.ApiService, as.Name, err)
+			saveServiceMetrics(constantx.ApiService, as.Name, resp)
 		}()
 	}
 	wg.Wait()
 }
 
 func saveLiveGauge(serviceType, serviceName string, err error) {
-	liveGauge := GetOrRegisterGauge(&prometheus.GaugeOpts{
-		Namespace:   serviceName,
-		Name:        "live_status",
-		ConstLabels: prometheus.Labels{"type": serviceType},
-	})
+	liveGauge := metricx.GetOrRegisterIGauge(&metricx.IOpts{
+		Namespace: serviceName,
+		Name:      "live_status",
+		Labels:    prometheus.Labels{"type": serviceType},
+	}, nil)
 	if liveGauge != nil {
 		if err == nil {
 			liveGauge.Set(1)
@@ -107,5 +103,5 @@ func saveServiceMetrics(serviceType, serviceName string, metrics []byte) {
 		result = append(result, '\n')
 	}
 	buffer := bytes.NewBuffer(result)
-	metricsHandler.AddBuffer(buffer)
+	DefaultMetricsHandler.AddBuffer(buffer)
 }

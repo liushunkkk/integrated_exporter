@@ -8,7 +8,9 @@ import (
 	"net/http"
 )
 
-var metricsHandler *MetricsHandler
+var (
+	DefaultMetricsHandler = NewMetricsHandler()
+)
 
 type MetricsHandler struct {
 	OldMetricsBuffer []*bytes.Buffer
@@ -16,10 +18,10 @@ type MetricsHandler struct {
 }
 
 func NewMetricsHandler() *MetricsHandler {
-	if metricsHandler == nil {
-		metricsHandler = &MetricsHandler{}
+	return &MetricsHandler{
+		OldMetricsBuffer: make([]*bytes.Buffer, 0),
+		MetricsBuffers:   make([]*bytes.Buffer, 0),
 	}
-	return metricsHandler
 }
 
 func (mh *MetricsHandler) AddBuffer(buf *bytes.Buffer) {
