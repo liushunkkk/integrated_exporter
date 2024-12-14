@@ -55,7 +55,7 @@ func saveLiveGauge(serviceType, serviceName string, err error, registry *metricx
 	liveGauge := metricx.GetOrRegisterIGauge(&metricx.IOpts{
 		Namespace: serviceName,
 		Name:      "live_status",
-		Labels:    prometheus.Labels{"type": serviceType},
+		Labels:    prometheus.Labels{"type": serviceType, "servicename": serviceName},
 	}, registry)
 	if liveGauge != nil {
 		if err == nil {
