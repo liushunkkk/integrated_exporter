@@ -65,7 +65,7 @@ func init() {
 	{
 		rootCmd.AddCommand(serverCmd)
 
-		serverCmd.Flags().StringP("port", "p", "8888", "exporter server port")
+		serverCmd.Flags().StringP("port", "p", "6070", "exporter server port")
 		serverCmd.Flags().StringP("interval", "i", "5s", "exporter server interval for probing")
 		serverCmd.Flags().StringP("route", "r", "/metrics", "exporter server metrics route")
 	}

@@ -8,6 +8,10 @@ import (
 	"github.com/spf13/viper"
 )
 
+var (
+	EnvPrefix string
+)
+
 // C global command flags
 var C = &Config{}
 
@@ -68,6 +72,7 @@ func SetAPP(app string) {
 }
 
 func SetEnvPrefix(envPrefix string) {
+	EnvPrefix = envPrefix
 	viper.SetEnvPrefix(envPrefix)
 }
 

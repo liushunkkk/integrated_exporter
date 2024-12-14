@@ -30,7 +30,7 @@ func Run(serverConfig config.ServerConfig) error {
 	//http.Handle("/metrics", promhttp.HandlerFor(Reg, promhttp.HandlerOpts{Registry: Reg}))
 	http.Handle(serverConfig.Route, DefaultMetricsHandler)
 
-	log.Printf("export /metrics on port :%v", serverConfig.Port)
+	log.Printf("export %s on port :%v", serverConfig.Route, serverConfig.Port)
 	err = http.ListenAndServe(fmt.Sprintf(":%v", serverConfig.Port), nil)
 	if err != nil {
 		return err

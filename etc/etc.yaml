@@ -3,7 +3,7 @@ APP: integrated-exporter
 syntax: ${SYNTAX_ENV}
 
 server:
-  port: 8888
+  port: 6070
   route: /metrics
   interval: 5s
   httpServices:
