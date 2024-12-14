@@ -7,6 +7,7 @@ import (
 )
 
 func TestIGauge(t *testing.T) {
+	DefaultIRegistry = NewIRegistry()
 	gauge := GetOrRegisterIGauge(&IOpts{
 		Namespace: "aaa",
 		Name:      "test_gauge",

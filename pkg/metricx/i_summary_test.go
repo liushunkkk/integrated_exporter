@@ -7,6 +7,7 @@ import (
 )
 
 func TestISummary(t *testing.T) {
+	DefaultIRegistry = NewIRegistry()
 	opts := NewRecommendISummaryOpts(&IOpts{
 		Namespace: "aaa",
 		Name:      "test_summary",

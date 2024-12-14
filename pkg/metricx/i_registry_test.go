@@ -8,6 +8,7 @@ import (
 )
 
 func TestIRegistry(t *testing.T) {
+	DefaultIRegistry = NewIRegistry()
 	counter := NewICounter("aaa", prometheus.NewCounter(prometheus.CounterOpts{
 		Name: "aaa",
 		Help: "aaa",

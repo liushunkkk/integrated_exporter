@@ -7,6 +7,7 @@ import (
 )
 
 func TestICounter(t *testing.T) {
+	DefaultIRegistry = NewIRegistry()
 	counter := GetOrRegisterICounter(&IOpts{
 		Namespace: "aaa",
 		Name:      "test_counter",

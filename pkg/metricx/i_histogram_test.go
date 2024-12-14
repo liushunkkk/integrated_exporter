@@ -7,6 +7,7 @@ import (
 )
 
 func TestIHistogram(t *testing.T) {
+	DefaultIRegistry = NewIRegistry()
 	opts := &IHistogramOpts{
 		IOpts: &IOpts{
 			Namespace: "aaa",
