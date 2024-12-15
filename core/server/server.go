@@ -44,7 +44,7 @@ func Run(config config.ServerConfig, registry *metricx.IRegistry, handler *Metri
 
 func collect(serverConfig config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {
 	handler.ClearBuffer()
-	probeServices(serverConfig, registry, handler)
+	ProbeServices(serverConfig, registry, handler)
 	metricsText, err := registry.ExportMetrics()
 	if err == nil {
 		handler.AddBuffer(metricsText)

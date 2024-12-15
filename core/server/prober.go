@@ -9,19 +9,20 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 
 	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/collectorx"
 	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 	"github.com/liushun-ing/integrated_exporter/pkg/metricx"
 	"github.com/liushun-ing/integrated_exporter/pkg/proberx"
 )
 
-func probeServices(config config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {
+func ProbeServices(config config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {
 	var wg sync.WaitGroup
 	for _, hs := range config.HttpServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			err := proberx.ProbeHttp(hs)
-			saveLiveGauge(constantx.HttpService, hs.Name, err, registry)
+			SaveLiveGauge(constantx.HttpService, hs.Name, err, registry)
 		}()
 	}
 	for _, rs := range config.GrpcServices {
@@ -29,7 +30,7 @@ func probeServices(config config.ServerConfig, registry *metricx.IRegistry, hand
 		go func() {
 			defer wg.Done()
 			err := proberx.ProbeGrpc(rs)
-			saveLiveGauge(constantx.GrpcService, rs.Name, err, registry)
+			SaveLiveGauge(constantx.GrpcService, rs.Name, err, registry)
 		}()
 	}
 	for _, ps := range config.ProcessServices {
@@ -37,7 +38,7 @@ func probeServices(config config.ServerConfig, registry *metricx.IRegistry, hand
 		go func() {
 			defer wg.Done()
 			err := proberx.ProbeProcess(ps)
-			saveLiveGauge(constantx.ProcessService, ps.Name, err, registry)
+			SaveLiveGauge(constantx.ProcessService, ps.Name, err, registry)
 		}()
 	}
 	for _, gs := range config.GethServices {
@@ -45,8 +46,8 @@ func probeServices(config config.ServerConfig, registry *metricx.IRegistry, hand
 		go func() {
 			defer wg.Done()
 			resp, err := proberx.ProbeGeth(gs)
-			saveLiveGauge(constantx.GethService, gs.Name, err, registry)
-			saveServiceMetrics(constantx.GethService, gs.Name, resp, handler)
+			SaveLiveGauge(constantx.GethService, gs.Name, err, registry)
+			SaveServiceMetrics(constantx.GethService, gs.Name, resp, handler)
 		}()
 	}
 	for _, as := range config.ApiServices {
@@ -54,14 +55,21 @@ func probeServices(config config.ServerConfig, registry *metricx.IRegistry, hand
 		go func() {
 			defer wg.Done()
 			resp, err := proberx.ProbeApi(as)
-			saveLiveGauge(constantx.ApiService, as.Name, err, registry)
-			saveServiceMetrics(constantx.ApiService, as.Name, resp, handler)
+			SaveLiveGauge(constantx.ApiService, as.Name, err, registry)
+			SaveServiceMetrics(constantx.ApiService, as.Name, resp, handler)
+		}()
+	}
+	if config.Machine {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			SaveMachineMetrics(constantx.MachineService, registry)
 		}()
 	}
 	wg.Wait()
 }
 
-func saveLiveGauge(serviceType, serviceName string, err error, registry *metricx.IRegistry) {
+func SaveLiveGauge(serviceType, serviceName string, err error, registry *metricx.IRegistry) {
 	liveGauge := metricx.GetOrRegisterIGauge(&metricx.IOpts{
 		Namespace: serviceName,
 		Name:      "live_status",
@@ -78,7 +86,8 @@ func saveLiveGauge(serviceType, serviceName string, err error, registry *metricx
 	}
 }
 
-func saveServiceMetrics(serviceType, serviceName string, metrics []byte, handler *MetricsHandler) {
+// SaveServiceMetrics add an <servicename> tag to the metrics and save them to the metrics center.
+func SaveServiceMetrics(serviceType, serviceName string, metrics []byte, handler *MetricsHandler) {
 	if metrics == nil {
 		log.Printf("No metrics found for %s service %s", serviceType, serviceName)
 	}
@@ -114,4 +123,9 @@ func saveServiceMetrics(serviceType, serviceName string, metrics []byte, handler
 	}
 	buffer := bytes.NewBuffer(result)
 	handler.AddBuffer(buffer)
+}
+
+func SaveMachineMetrics(serviceType string, registry *metricx.IRegistry) {
+	machineCollector := collectorx.NewMachineCollector(serviceType, registry)
+	machineCollector.CollectAll()
 }

@@ -6,6 +6,7 @@ server:
   port: 6070
   route: /metrics
   interval: 5s
+  machine: true
   httpServices:
     - name: successHttp
       address: http://127.0.0.1:8001/api/v1/user/list

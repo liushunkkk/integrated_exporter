@@ -6,4 +6,5 @@ const (
 	GethService    = "geth"
 	ApiService     = "api"
 	ProcessService = "process"
+	MachineService = "machine"
 )

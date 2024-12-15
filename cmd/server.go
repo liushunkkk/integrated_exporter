@@ -66,8 +66,9 @@ func init() {
 	{
 		rootCmd.AddCommand(serverCmd)
 
-		serverCmd.Flags().StringP("port", "p", "6070", "exporter server port")
+		serverCmd.Flags().IntP("port", "p", 6070, "exporter server port")
 		serverCmd.Flags().StringP("interval", "i", "5s", "exporter server interval for probing")
 		serverCmd.Flags().StringP("route", "r", "/metrics", "exporter server metrics route")
+		serverCmd.Flags().BoolP("machine", "m", true, "whether collect machine metrics")
 	}
 }
