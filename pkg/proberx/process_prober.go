@@ -2,11 +2,13 @@ package proberx
 
 import (
 	"fmt"
-	"github.com/liushun-ing/integrated_exporter/config"
-	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
-	"github.com/shirou/gopsutil/v4/process"
 	"log"
 	"strings"
+
+	"github.com/shirou/gopsutil/v4/process"
+
+	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
 func ProbeProcess(ps config.ProcessService) error {
