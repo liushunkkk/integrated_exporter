@@ -54,4 +54,5 @@ jobs:
 
       - name: run test case # 执行所有单元测试
         run: |
+          nohup sleep 100 > /dev/null 2>&1 &
           go test ./...

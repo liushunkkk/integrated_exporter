@@ -14,7 +14,7 @@ func TestMachineCollector_Collect(t *testing.T) {
 	machineConfig := config.MachineConfig{
 		Metrics:   constantx.MachineAll,
 		Mounts:    []string{"/"},
-		Processes: []string{"sysmond"},
+		Processes: []string{"sleep"},
 	}
 	registry := metricx.NewIRegistry()
 	mc := NewMachineCollector(machineConfig, "test_machine", registry)
@@ -26,7 +26,7 @@ func TestMachineCollector_Collect(t *testing.T) {
 	assert.Contains(t, metrics.String(), "machine_cpu_core")
 	assert.Contains(t, metrics.String(), `machine_disk_free{mountpoint="/"}`)
 	assert.Contains(t, metrics.String(), "machine_memory_total")
-	assert.Contains(t, metrics.String(), `machine_process_cpu_percent{processname="sysmond"}`)
+	assert.Contains(t, metrics.String(), `machine_process_cpu_percent{processname="sleep"}`)
 	assert.Contains(t, metrics.String(), "machine_process_total")
 	assert.Contains(t, metrics.String(), "network_connections")
 }
@@ -47,7 +47,7 @@ func TestMachineCollector_Collect_NoNetwork(t *testing.T) {
 	assert.Contains(t, metrics.String(), `machine_disk_free{mountpoint="/"}`)
 	assert.NotContains(t, metrics.String(), `machine_disk_free{mountpoint="/dev"}`)
 	assert.Contains(t, metrics.String(), "machine_memory_total")
-	assert.NotContains(t, metrics.String(), `machine_process_cpu_percent{processname="sysmond"}`)
+	assert.NotContains(t, metrics.String(), `machine_process_cpu_percent{processname="sleep"}`)
 	assert.Contains(t, metrics.String(), "machine_process_total")
 	assert.NotContains(t, metrics.String(), "network_connections")
 }
