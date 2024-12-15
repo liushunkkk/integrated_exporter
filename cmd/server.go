@@ -28,13 +28,13 @@ var serverCmd = &cobra.Command{
 				return fmt.Errorf("%s: HttpService.Timeout should be smaller than Server.Interval", service.Name)
 			}
 		}
-		for _, service := range config.C.Server.RpcServices {
+		for _, service := range config.C.Server.GrpcServices {
 			duration, err := time.ParseDuration(service.Timeout)
 			if err != nil {
 				return err
 			}
 			if duration >= interval {
-				return fmt.Errorf("%s: RpcService.Timeout should be smaller than Server.Interval", service.Name)
+				return fmt.Errorf("%s: GrpcService.Timeout should be smaller than Server.Interval", service.Name)
 			}
 		}
 		for _, service := range config.C.Server.GethServices {

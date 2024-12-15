@@ -13,6 +13,7 @@ import (
 	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
+// ProbeHttp detect whether an HTTP service is running properly.
 func ProbeHttp(hs config.HttpService) error {
 	timeout, err := time.ParseDuration(hs.Timeout)
 	if err != nil {

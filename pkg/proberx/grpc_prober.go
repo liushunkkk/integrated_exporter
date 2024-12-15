@@ -18,15 +18,16 @@ import (
 	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
-func ProbeRpc(rs config.RpcService) error {
+// ProbeGrpc detect whether a gRPC service is running properly.
+func ProbeGrpc(rs config.GrpcService) error {
 	timeout, err := time.ParseDuration(rs.Timeout)
 	if err != nil {
-		log.Printf("Failed to parse timeout duration for probe %s %v: %v", constantx.RpcService, rs.Name, err)
+		log.Printf("Failed to parse timeout duration for probe %s %v: %v", constantx.GrpcService, rs.Name, err)
 		return err
 	}
 	client, err := grpc.NewClient(rs.Address, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
-		log.Printf("Failed to connect to server for %s %v: %v", constantx.RpcService, rs.Name, err)
+		log.Printf("Failed to connect to server for %s %v: %v", constantx.GrpcService, rs.Name, err)
 		return err
 	}
 	defer client.Close()
@@ -49,13 +50,13 @@ func ProbeRpc(rs config.RpcService) error {
 	next := grpcurl.NewJSONRequestParser(bytes.NewBuffer([]byte(rs.Body)), resolver).Next
 	err = grpcurl.InvokeRPC(ctx, descriptorSource, client, rs.RpcMethod, []string{auth}, &handler, next)
 	if err != nil {
-		log.Printf("Failed to invoke method for %v %v: %v", constantx.RpcService, rs.Name, err)
+		log.Printf("Failed to invoke method for %v %v: %v", constantx.GrpcService, rs.Name, err)
 		return err
 	}
 
 	if rs.Response != "" {
 		if !strings.Contains(resp.String(), rs.Response) {
-			return fmt.Errorf("%s %s probe response does not contain %s", constantx.RpcService, rs.Name, rs.Response)
+			return fmt.Errorf("%s %s probe response does not contain %s", constantx.GrpcService, rs.Name, rs.Response)
 		}
 	}
 	return nil

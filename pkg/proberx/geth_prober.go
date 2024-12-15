@@ -10,6 +10,8 @@ import (
 	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
+// ProbeGeth detect whether a Geth service exposing monitoring metrics is running properly
+// and return its monitoring metrics.
 func ProbeGeth(gs config.GethService) ([]byte, error) {
 	timeout, err := time.ParseDuration(gs.Timeout)
 	if err != nil {

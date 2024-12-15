@@ -10,6 +10,8 @@ import (
 	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
+// ProbeApi detect whether an API service exposing monitoring metrics is running properly
+// and return its monitoring metrics.
 func ProbeApi(as config.ApiService) ([]byte, error) {
 	timeout, err := time.ParseDuration(as.Timeout)
 	if err != nil {

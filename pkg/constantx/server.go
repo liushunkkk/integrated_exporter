@@ -2,7 +2,7 @@ package constantx
 
 const (
 	HttpService    = "http"
-	RpcService     = "rpc"
+	GrpcService    = "grpc"
 	GethService    = "geth"
 	ApiService     = "api"
 	ProcessService = "process"

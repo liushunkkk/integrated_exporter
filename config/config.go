@@ -28,7 +28,7 @@ type ServerConfig struct {
 	GethServices    []GethService    `mapstructure:"gethServices"`
 	ApiServices     []ApiService     `mapstructure:"apiServices"`
 	HttpServices    []HttpService    `mapstructure:"httpServices"`
-	RpcServices     []RpcService     `mapstructure:"rpcServices"`
+	GrpcServices    []GrpcService    `mapstructure:"grpcServices"`
 	ProcessServices []ProcessService `mapstructure:"processServices"`
 }
 
@@ -42,7 +42,7 @@ type HttpService struct {
 	Timeout  string `mapstructure:"timeout"`
 }
 
-type RpcService struct {
+type GrpcService struct {
 	Name      string `mapstructure:"name"`
 	Address   string `mapstructure:"address"`
 	Token     string `mapstructure:"token"`

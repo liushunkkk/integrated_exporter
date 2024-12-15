@@ -11,6 +11,7 @@ import (
 	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
+// ProbeProcess detect whether a program is running.
 func ProbeProcess(ps config.ProcessService) error {
 	processes, err := process.Processes()
 	if err != nil {

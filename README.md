@@ -35,7 +35,7 @@ cfg := config.ServerConfig{
     Interval: "5s",
     Route: "/metrics",
 }
-server.Run(cfg, nil, nil) // external包, 使用默认的 IRegistry 和 MetricsHandler
+server.Run(cfg, nil, nil) // 使用默认的 IRegistry 和 MetricsHandler
 ```
 
 3、编写指标

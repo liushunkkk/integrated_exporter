@@ -24,12 +24,12 @@ func probeServices(config config.ServerConfig, registry *metricx.IRegistry, hand
 			saveLiveGauge(constantx.HttpService, hs.Name, err, registry)
 		}()
 	}
-	for _, rs := range config.RpcServices {
+	for _, rs := range config.GrpcServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
-			err := proberx.ProbeRpc(rs)
-			saveLiveGauge(constantx.RpcService, rs.Name, err, registry)
+			err := proberx.ProbeGrpc(rs)
+			saveLiveGauge(constantx.GrpcService, rs.Name, err, registry)
 		}()
 	}
 	for _, ps := range config.ProcessServices {
