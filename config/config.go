@@ -26,11 +26,17 @@ type ServerConfig struct {
 	Interval        string           `mapstructure:"interval"`
 	Route           string           `mapstructure:"route"`
 	Machine         bool             `mapstructure:"machine"`
+	MachineConfig   MachineConfig    `mapstructure:"machineConfig"`
 	GethServices    []GethService    `mapstructure:"gethServices"`
 	ApiServices     []ApiService     `mapstructure:"apiServices"`
 	HttpServices    []HttpService    `mapstructure:"httpServices"`
 	GrpcServices    []GrpcService    `mapstructure:"grpcServices"`
 	ProcessServices []ProcessService `mapstructure:"processServices"`
+}
+
+type MachineConfig struct {
+	Mounts    []string `mapstructure:"mounts"`
+	Processes []string `mapstructure:"processes"`
 }
 
 type HttpService struct {

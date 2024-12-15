@@ -70,5 +70,7 @@ func init() {
 		serverCmd.Flags().StringP("interval", "i", "5s", "exporter server interval for probing")
 		serverCmd.Flags().StringP("route", "r", "/metrics", "exporter server metrics route")
 		serverCmd.Flags().BoolP("machine", "m", true, "whether collect machine metrics")
+		serverCmd.Flags().StringSlice("machineConfig.mounts", []string{"/"}, "the mount points that need disk metrics.")
+		serverCmd.Flags().StringSlice("machineConfig.processes", nil, "the processes that need detailed metrics.")
 	}
 }
