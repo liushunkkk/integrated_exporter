@@ -1,8 +1,9 @@
 package constantx
 
 const (
-	HttpService = "http"
-	RpcService  = "rpc"
-	GethService = "geth"
-	ApiService  = "api"
+	HttpService    = "http"
+	RpcService     = "rpc"
+	GethService    = "geth"
+	ApiService     = "api"
+	ProcessService = "process"
 )

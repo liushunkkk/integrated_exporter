@@ -22,13 +22,14 @@ type Config struct {
 }
 
 type ServerConfig struct {
-	Port         int           `mapstructure:"port"`
-	Interval     string        `mapstructure:"interval"`
-	Route        string        `mapstructure:"route"`
-	GethServices []GethService `mapstructure:"gethServices"`
-	ApiServices  []ApiService  `mapstructure:"apiServices"`
-	HttpServices []HttpService `mapstructure:"httpServices"`
-	RpcServices  []RpcService  `mapstructure:"rpcServices"`
+	Port            int              `mapstructure:"port"`
+	Interval        string           `mapstructure:"interval"`
+	Route           string           `mapstructure:"route"`
+	GethServices    []GethService    `mapstructure:"gethServices"`
+	ApiServices     []ApiService     `mapstructure:"apiServices"`
+	HttpServices    []HttpService    `mapstructure:"httpServices"`
+	RpcServices     []RpcService     `mapstructure:"rpcServices"`
+	ProcessServices []ProcessService `mapstructure:"processServices"`
 }
 
 type HttpService struct {
@@ -63,6 +64,11 @@ type GethService struct {
 	Address string `json:"address"`
 	Token   string `json:"token"`
 	Timeout string `mapstructure:"timeout"`
+}
+
+type ProcessService struct {
+	Name   string `mapstructure:"name"`
+	Target string `mapstructure:"target"`
 }
 
 func SetAPP(app string) {

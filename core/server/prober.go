@@ -14,51 +14,59 @@ import (
 	"github.com/liushun-ing/integrated_exporter/pkg/proberx"
 )
 
-func probeServices(serverConfig config.ServerConfig) {
+func probeServices(config config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {
 	var wg sync.WaitGroup
-	for _, hs := range serverConfig.HttpServices {
+	for _, hs := range config.HttpServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			err := proberx.ProbeHttp(hs)
-			saveLiveGauge(constantx.HttpService, hs.Name, err)
+			saveLiveGauge(constantx.HttpService, hs.Name, err, registry)
 		}()
 	}
-	for _, rs := range serverConfig.RpcServices {
+	for _, rs := range config.RpcServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			err := proberx.ProbeRpc(rs)
-			saveLiveGauge(constantx.RpcService, rs.Name, err)
+			saveLiveGauge(constantx.RpcService, rs.Name, err, registry)
 		}()
 	}
-	for _, gs := range serverConfig.GethServices {
+	for _, ps := range config.ProcessServices {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			err := proberx.ProbeProcess(ps)
+			saveLiveGauge(constantx.ProcessService, ps.Name, err, registry)
+		}()
+	}
+	for _, gs := range config.GethServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			resp, err := proberx.ProbeGeth(gs)
-			saveLiveGauge(constantx.GethService, gs.Name, err)
-			saveServiceMetrics(constantx.GethService, gs.Name, resp)
+			saveLiveGauge(constantx.GethService, gs.Name, err, registry)
+			saveServiceMetrics(constantx.GethService, gs.Name, resp, handler)
 		}()
 	}
-	for _, as := range serverConfig.ApiServices {
+	for _, as := range config.ApiServices {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			resp, err := proberx.ProbeApi(as)
-			saveLiveGauge(constantx.ApiService, as.Name, err)
-			saveServiceMetrics(constantx.ApiService, as.Name, resp)
+			saveLiveGauge(constantx.ApiService, as.Name, err, registry)
+			saveServiceMetrics(constantx.ApiService, as.Name, resp, handler)
 		}()
 	}
 	wg.Wait()
 }
 
-func saveLiveGauge(serviceType, serviceName string, err error) {
+func saveLiveGauge(serviceType, serviceName string, err error, registry *metricx.IRegistry) {
 	liveGauge := metricx.GetOrRegisterIGauge(&metricx.IOpts{
 		Namespace: serviceName,
 		Name:      "live_status",
 		Labels:    prometheus.Labels{"type": serviceType, "servicename": serviceName},
-	}, nil)
+	}, registry)
 	if liveGauge != nil {
 		if err == nil {
 			liveGauge.Set(1)
@@ -70,7 +78,7 @@ func saveLiveGauge(serviceType, serviceName string, err error) {
 	}
 }
 
-func saveServiceMetrics(serviceType, serviceName string, metrics []byte) {
+func saveServiceMetrics(serviceType, serviceName string, metrics []byte, handler *MetricsHandler) {
 	if metrics == nil {
 		log.Printf("No metrics found for %s service %s", serviceType, serviceName)
 	}
@@ -105,5 +113,5 @@ func saveServiceMetrics(serviceType, serviceName string, metrics []byte) {
 		result = append(result, '\n')
 	}
 	buffer := bytes.NewBuffer(result)
-	DefaultMetricsHandler.AddBuffer(buffer)
+	handler.AddBuffer(buffer)
 }

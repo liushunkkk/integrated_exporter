@@ -2,12 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/liushun-ing/integrated_exporter/core/server"
 	"time"
 
 	"github.com/spf13/cobra"
 
 	"github.com/liushun-ing/integrated_exporter/config"
-	"github.com/liushun-ing/integrated_exporter/internal/server"
 )
 
 // serverCmd represents the server command
@@ -58,7 +58,7 @@ var serverCmd = &cobra.Command{
 		return nil
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
-		return server.Run(config.C.Server)
+		return server.Run(config.C.Server, nil, nil)
 	},
 }
 

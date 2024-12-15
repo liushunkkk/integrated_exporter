@@ -7,12 +7,12 @@ server:
   route: /metrics
   interval: 5s
   httpServices:
-    - name: success_http
+    - name: successHttp
       address: http://127.0.0.1:8001/api/v1/user/list
       method: GET
       timeout: 2s
       response: success
-    - name: fail_http
+    - name: failHttp
       address: http://127.0.0.1:8002
       timeout: 2s
   rpcServices:
@@ -24,13 +24,16 @@ server:
       response: YWRtaW46YWRtaW4
       timeout: 2s
   gethServices:
-    - name: gethdev
+    - name: devGeth
       address: http://34.226.211.254:6060/debug/metrics/prometheus
       token: Bearer 123456
       timeout: 2s
   apiServices:
-    - name: portal
+    - name: portalApi
       address: http://100.27.68.168:6060/metrics
       token: Bearer 123456
       timeout: 2s
+  processServices:
+    - name: mysqlProcess
+      target: mysql
 
