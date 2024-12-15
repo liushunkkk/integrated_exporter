@@ -18,11 +18,11 @@ func ProbeProcess(ps config.ProcessService) error {
 		return err
 	}
 	for _, proc := range processes {
-		cmdline, err := proc.Name()
+		name, err := proc.Name()
 		if err != nil {
 			continue
 		}
-		if strings.Contains(cmdline, ps.Name) {
+		if strings.Contains(name, ps.Target) {
 			return nil
 		}
 	}
