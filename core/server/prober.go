@@ -59,13 +59,11 @@ func ProbeServices(config config.ServerConfig, registry *metricx.IRegistry, hand
 			SaveServiceMetrics(constantx.ApiService, as.Name, resp, handler)
 		}()
 	}
-	if config.Machine {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			SaveMachineMetrics(config.MachineConfig, constantx.MachineService, registry)
-		}()
-	}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		SaveMachineMetrics(config.MachineConfig, constantx.MachineService, registry)
+	}()
 	wg.Wait()
 }
 
@@ -127,5 +125,5 @@ func SaveServiceMetrics(serviceType, serviceName string, metrics []byte, handler
 
 func SaveMachineMetrics(cfg config.MachineConfig, serviceType string, registry *metricx.IRegistry) {
 	machineCollector := collectorx.NewMachineCollector(cfg, serviceType, registry)
-	machineCollector.CollectAll()
+	machineCollector.Collect()
 }

@@ -8,6 +8,7 @@ import (
 
 	"github.com/liushun-ing/integrated_exporter/config"
 	"github.com/liushun-ing/integrated_exporter/core/server"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 )
 
 // serverCmd represents the server command
@@ -69,7 +70,7 @@ func init() {
 		serverCmd.Flags().IntP("port", "p", 6070, "exporter server port")
 		serverCmd.Flags().StringP("interval", "i", "5s", "exporter server interval for probing")
 		serverCmd.Flags().StringP("route", "r", "/metrics", "exporter server metrics route")
-		serverCmd.Flags().BoolP("machine", "m", true, "whether collect machine metrics")
+		serverCmd.Flags().StringSlice("machineConfig.metrics", constantx.MachineAll, "the machine metrics that need to be exported.")
 		serverCmd.Flags().StringSlice("machineConfig.mounts", []string{"/"}, "the mount points that need disk metrics.")
 		serverCmd.Flags().StringSlice("machineConfig.processes", nil, "the processes that need detailed metrics.")
 	}

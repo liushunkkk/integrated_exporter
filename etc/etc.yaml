@@ -8,9 +8,11 @@ server:
   interval: 5s
   machine: true
   machineConfig:
-    mounts: [/,/System/Volumes/Data]
-#      - /
-#      - /System/Volumes/Data
+    metrics: [ cpu,memory,disk,process ]
+    mounts: [ /,/System/Volumes/Data ]
+    processes: [ mysql ]
+  #      - /
+  #      - /System/Volumes/Data
   httpServices:
     - name: successHttp
       address: http://127.0.0.1:8001/api/v1/user/list

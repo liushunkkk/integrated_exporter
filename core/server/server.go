@@ -26,9 +26,9 @@ func Run(config config.ServerConfig, registry *metricx.IRegistry, handler *Metri
 	defer ticker.Stop()
 
 	go func() {
-		collect(config, registry, handler)
+		Collect(config, registry, handler)
 		for range ticker.C {
-			collect(config, registry, handler)
+			Collect(config, registry, handler)
 		}
 	}()
 
@@ -42,7 +42,7 @@ func Run(config config.ServerConfig, registry *metricx.IRegistry, handler *Metri
 	return nil
 }
 
-func collect(serverConfig config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {
+func Collect(serverConfig config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {
 	handler.ClearBuffer()
 	ProbeServices(serverConfig, registry, handler)
 	metricsText, err := registry.ExportMetrics()

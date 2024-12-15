@@ -10,6 +10,7 @@ import (
 	"github.com/shirou/gopsutil/v4/process"
 
 	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
 	"github.com/liushun-ing/integrated_exporter/pkg/metricx"
 	"github.com/liushun-ing/integrated_exporter/pkg/stringx"
 )
@@ -28,12 +29,21 @@ func NewMachineCollector(cfg config.MachineConfig, namespace string, registry *m
 	}
 }
 
-func (mc *MachineCollector) CollectAll() {
-	mc.CollectCpuMetrics()
-	mc.CollectMemoryMetrics()
-	mc.CollectDiskMetrics()
-	mc.CollectProcessMetrics()
-	mc.CollectNetworkMetrics()
+func (mc *MachineCollector) Collect() {
+	for _, m := range mc.Cfg.Metrics {
+		switch m {
+		case constantx.MachineCpu:
+			mc.CollectCpuMetrics()
+		case constantx.MachineMemory:
+			mc.CollectMemoryMetrics()
+		case constantx.MachineDisk:
+			mc.CollectDiskMetrics()
+		case constantx.MachineProcess:
+			mc.CollectProcessMetrics()
+		case constantx.MachineNetwork:
+			mc.CollectNetworkMetrics()
+		}
+	}
 }
 
 // CollectCpuMetrics collect and register cpu metrics.

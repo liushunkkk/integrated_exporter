@@ -25,7 +25,6 @@ type ServerConfig struct {
 	Port            int              `mapstructure:"port"`
 	Interval        string           `mapstructure:"interval"`
 	Route           string           `mapstructure:"route"`
-	Machine         bool             `mapstructure:"machine"`
 	MachineConfig   MachineConfig    `mapstructure:"machineConfig"`
 	GethServices    []GethService    `mapstructure:"gethServices"`
 	ApiServices     []ApiService     `mapstructure:"apiServices"`
@@ -35,6 +34,7 @@ type ServerConfig struct {
 }
 
 type MachineConfig struct {
+	Metrics   []string `mapstructure:"metrics"`
 	Mounts    []string `mapstructure:"mounts"`
 	Processes []string `mapstructure:"processes"`
 }
