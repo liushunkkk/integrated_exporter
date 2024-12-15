@@ -7,6 +7,13 @@
   - Gauge
   - Summary
   - Histogram
+- 支持`machine`基础监控指标：
+  - CPU：CPU核心数、CPU使用率...
+  - Memory：主存以及交换内存的使用情况...
+  - Disk：指定磁盘挂载点的使用情况...
+  - Process：进程数、指定进程的详细信息...
+  - Network：网络连接数、网络读写信息...
+  
 
 
 - 配置服务列表，集成多服务指标，支持如下服务探测：
@@ -35,7 +42,7 @@ cfg := config.ServerConfig{
     Interval: "5s",
     Route: "/metrics",
 }
-server.Run(cfg, nil, nil) // 使用默认的 IRegistry 和 MetricsHandler
+server.Run(cfg, nil, nil) // 传入 nil 则使用默认的 IRegistry 和 MetricsHandler
 ```
 
 3、编写指标
@@ -100,7 +107,7 @@ touch etc/.env.yaml
 3、启动程序
 
 ```shell
-integrated_exporter server
+integrated_exporter server # 部分参数也支持 flags 传入
 ```
 
 
