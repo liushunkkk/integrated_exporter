@@ -8,7 +8,7 @@ import (
 const (
 	APP       = "github.com/liushun-ing/integrated_exporter"
 	VERSION   = "1.0.0"
-	EnvPrefix = "CLI"
+	EnvPrefix = "INTEGRATEDEXPORTER"
 )
 
 func main() {

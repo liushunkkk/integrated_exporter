@@ -114,7 +114,29 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 ## Cookbook
 
+### 配置项
+
+样例配置可以前往[`etc/etc.yaml`](https://github.com/liushun-ing/integrated_exporter/blob/main/etc/etc.yaml)文件查看.
+
+配置默认值如下：
+
+- Port: `6070`
+- Route: `/metrics`
+- Interval: `5s`
+- MachineConfig:
+  - Metrics: `[ cpu,memory,disk,process,network ]`
+  - Mounts: `[ / ]`
+- GethServices: `nil`
+- ApiServices: `nil`
+- HttpServices: `nil`
+- GrpcServices: `nil`
+- ProcessServices: `nil`
+
+
+
 ### 环境变量
 
 - 可以在 `etc/.env.yaml` 中创建环境变量，并在 `etc/etc.yaml` 中用 `${}` 使用.
 - 在机器环境变量中设置以 `{EnvPrefix}_` 开头的变量，如 `{ENV_PREFIX}_A_B` 将映射到 `config.C.a.b`.
+- 默认`EnvPrefix`为`INTEGRATEDEXPORTER`
+
