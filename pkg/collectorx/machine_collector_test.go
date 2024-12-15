@@ -1,6 +1,8 @@
 package collectorx
 
 import (
+	"os"
+	"os/exec"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -11,6 +13,16 @@ import (
 )
 
 func TestMachineCollector_Collect(t *testing.T) {
+	cmd := exec.Command("nohup", "sleep", "100")
+
+	cmd.Stdout = os.DevNull
+	cmd.Stderr = os.DevNull
+	cmd.Stdin = os.DevNull
+
+	if err := cmd.Start(); err != nil {
+		panic(err)
+	}
+
 	machineConfig := config.MachineConfig{
 		Metrics:   constantx.MachineAll,
 		Mounts:    []string{"/"},
@@ -32,6 +44,16 @@ func TestMachineCollector_Collect(t *testing.T) {
 }
 
 func TestMachineCollector_Collect_NoNetwork(t *testing.T) {
+	cmd := exec.Command("nohup", "sleep", "100")
+
+	cmd.Stdout = os.DevNull
+	cmd.Stderr = os.DevNull
+	cmd.Stdin = os.DevNull
+
+	if err := cmd.Start(); err != nil {
+		panic(err)
+	}
+
 	machineConfig := config.MachineConfig{
 		Metrics: constantx.MachineNoNetwork,
 		Mounts:  []string{"/"},
