@@ -106,6 +106,8 @@ mkdir etc
 touch etc/etc.yaml
 # 如果需要，可以编写环境变量配置文件
 touch etc/.env.yaml
+# 也支持传入制定的文件
+integrated_exporter server --config=/path/to/your/config.yaml
 ```
 
 3、启动程序
@@ -118,7 +120,13 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 #### 无 go 环境
 
-可以根据系统自行下载[对应的 release 包](https://github.com/liushunking/integrated_exporter/releases)。
+可以根据系统自行下载[对应的 release 包](https://github.com/liushunking/integrated_exporter/releases)，然后执行：
+
+```sh
+./integrated_exporter server
+# 同样的，如果有需要可以设置配置文件，或者传入 flags，比如：
+./integrated_exporter server --port=6666 --route=/prometheus/metrics
+```
 
 
 
@@ -127,10 +135,11 @@ integrated_exporter server # 部分参数也支持 flags 传入
 使用默认配置
 
 ```sh
-docker pull ghcr.io/liushunking/integrated_exporter:v1.0.0
-# or docker pull liushun311/integrated_exporter:v1.0.0
-# docker run -d -p 6070:6070 liushun311/integrated_exporter
-docker run -d -p 6070:6070 integrated_exporter
+docker pull ghcr.io/liushunking/integrated_exporter:latest
+docker run -d -p 6070:6070 --name integrated_exporter ghcr.io/liushunking/integrated_exporter
+# or 
+docker pull liushun311/integrated_exporter:latest
+docker run -d -p 6070:6070 --name integrated_exporter liushun311/integrated_exporter
 ```
 
 使用自定义配置
@@ -144,9 +153,11 @@ mkdir etc
 touch etc/etc.yaml
 # 如果需要，可以编写环境变量配置文件
 touch etc/.env.yaml
-docker pull ghcr.io/liushunking/integrated_exporter:v1.0.0
-# or docker pull liushun311/integrated_exporter:v1.0.0
-docker run -d -p 6070:6070 -v running_dir/etc:/etc integrated_exporter
+docker pull ghcr.io/liushunking/integrated_exporter:latest
+docker run -d -p 6070:6070 -v running_dir/etc:/etc --name integrated_exporter ghcr.io/liushunking/integrated_exporter
+# or 
+docker pull liushun311/integrated_exporter:latest
+docker run -d -p 6070:6070 -v running_dir/etc:/etc --name integrated_exporter liushun311/integrated_exporter
 ```
 
 
@@ -155,7 +166,7 @@ docker run -d -p 6070:6070 -v running_dir/etc:/etc integrated_exporter
 
 ### 配置项
 
-样例配置可以前往[`etc/etc.yaml`](https://github.com/liushunking/integrated_exporter/blob/main/etc/etc.yaml)文件查看.
+样例配置可以前往[`etc/etc.example.yaml`](https://github.com/liushunking/integrated_exporter/blob/main/etc/etc.example.yaml)文件查看.
 
 配置默认值如下：
 
