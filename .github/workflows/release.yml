@@ -62,7 +62,7 @@ jobs:
         with:
           registry: ghcr.io
           username: liushunking
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.ACCESS_PACKAGE_TOKEN }}
 
       - name: Docker build and push
         uses: docker/build-push-action@v6
