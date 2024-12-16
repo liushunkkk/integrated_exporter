@@ -41,7 +41,7 @@ EXPOSE 6070
 
 # Set the default command
 ENTRYPOINT ["./integrated_exporter", \
-            "server",
+            "server", \
             "--port=6070", \
             "--interval=5s", \
             "--route=/metrics", \
