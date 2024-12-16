@@ -128,6 +128,8 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 ```sh
 docker pull ghcr.io/liushunking/integrated_exporter:v1.0.0
+# or docker pull liushun311/integrated_exporter:v1.0.0
+# docker run -d -p 6070:6070 liushun311/integrated_exporter
 docker run -d -p 6070:6070 integrated_exporter
 ```
 
@@ -143,6 +145,7 @@ touch etc/etc.yaml
 # 如果需要，可以编写环境变量配置文件
 touch etc/.env.yaml
 docker pull ghcr.io/liushunking/integrated_exporter:v1.0.0
+# or docker pull liushun311/integrated_exporter:v1.0.0
 docker run -d -p 6070:6070 -v running_dir/etc:/etc integrated_exporter
 ```
 
