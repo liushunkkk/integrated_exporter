@@ -55,7 +55,7 @@ jobs:
           context: .
           platforms: linux/amd64, linux/arm64
           push: true
-          tags: liushunking/integrated_exporter:latest,liushunking/integrated_exporter:${{ steps.get_version.outputs.VERSION }}
+          tags: liushun311/integrated_exporter:latest,liushun311/integrated_exporter:${{ steps.get_version.outputs.VERSION }}
 
       - name: Log in to ghcr
         uses: docker/login-action@v3
