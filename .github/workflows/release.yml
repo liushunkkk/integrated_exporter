@@ -38,7 +38,7 @@ jobs:
 
       - name: Get version
         id: get_version
-        run: echo name=VERSION::$GITHUB_REF_NAME >> $GITHUB_OUTPUT
+        run: echo VERSION=$GITHUB_REF_NAME >> $GITHUB_OUTPUT
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
