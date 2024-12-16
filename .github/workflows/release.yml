@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  packages: write
 
 jobs:
   releaseProgram:
@@ -49,7 +48,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.ACCESS_PACKAGE_TOKEN }}
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
