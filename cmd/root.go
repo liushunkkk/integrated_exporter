@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v3"
 
-	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/config"
 )
 
 var (
@@ -22,9 +22,9 @@ var (
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "github.com/liushun-ing/integrated_exporter",
-	Short: "Short description of integrated-exporter",
-	Long:  `Long description of integrated-exporter`,
+	Use:   "integrated_exporter",
+	Short: "Simplify metrics monitoring for multiple services.",
+	Long:  `Combine host monitoring, service monitoring, and service discovery into one, simplifying metrics monitoring for multiple services.`,
 }
 
 func init() {

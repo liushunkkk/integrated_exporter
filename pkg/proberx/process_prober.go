@@ -7,8 +7,8 @@ import (
 
 	"github.com/shirou/gopsutil/v4/process"
 
-	"github.com/liushun-ing/integrated_exporter/config"
-	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
+	"github.com/liushunking/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/pkg/constantx"
 )
 
 // ProbeProcess detect whether a program is running.

@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/liushun-ing/integrated_exporter/config"
-	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
+	"github.com/liushunking/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/pkg/constantx"
 )
 
 // ProbeGeth detect whether a Geth service exposing monitoring metrics is running properly

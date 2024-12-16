@@ -22,6 +22,8 @@
   - 有监控指标的`API`服务：配置指标地址，生成`live_status`指标，并合并`API`服务的指标
   - 有监控指标的`Geth`服务：配置指标地址，生成`live_status`指标，并合并`Geth`服务的指标
 
+> **Attention：如果不配置服务列表，默认情况下是个简单版本的`Node Exporter`.**
+
 
 
 ## 用法
@@ -31,7 +33,7 @@
 1、引入包
 
 ```shell
-go get https://github.com/liushun-ing/integrated_exporter.git@main
+go get github.com/liushunking/integrated_exporter@v1.0.0
 ```
 
 2、创建配置，并启动程序
@@ -85,13 +87,15 @@ histogram.Observe(15)
 
 ### 作为程序使用
 
+#### 有 go 环境
+
 1、下载程序
 
 ```shell
-go install https://github.com/liushun-ing/integrated_exporter.git@main
+go install github.com/liushunking/integrated_exporter@v1.0.0
 ```
 
-2、创建配置文件
+2、创建配置文件（如果需要）
 
 ```shell
 # 进入你的执行目录
@@ -112,11 +116,43 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 
 
+#### 无 go 环境
+
+可以根据系统自行下载[对应的 release 包](https://github.com/liushunking/integrated_exporter/releases)。
+
+
+
+#### Docker启动
+
+使用默认配置
+
+```sh
+docker pull ghcr.io/liushunking/integrated_exporter:v1.0.0
+docker run -d -p 6070:6070 integrated_exporter
+```
+
+使用自定义配置
+
+```sh
+# 进入你的执行目录
+cd running_dir
+# 创建配置文件夹
+mkdir etc
+# 编写配置文件
+touch etc/etc.yaml
+# 如果需要，可以编写环境变量配置文件
+touch etc/.env.yaml
+docker pull ghcr.io/liushunking/integrated_exporter:v1.0.0
+docker run -d -p 6070:6070 -v running_dir/etc:/etc integrated_exporter
+```
+
+
+
 ## Cookbook
 
 ### 配置项
 
-样例配置可以前往[`etc/etc.yaml`](https://github.com/liushun-ing/integrated_exporter/blob/main/etc/etc.yaml)文件查看.
+样例配置可以前往[`etc/etc.yaml`](https://github.com/liushunking/integrated_exporter/blob/main/etc/etc.yaml)文件查看.
 
 配置默认值如下：
 

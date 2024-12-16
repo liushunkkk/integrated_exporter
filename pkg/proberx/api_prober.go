@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/liushun-ing/integrated_exporter/config"
-	"github.com/liushun-ing/integrated_exporter/pkg/constantx"
+	"github.com/liushunking/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/pkg/constantx"
 )
 
 // ProbeApi detect whether an API service exposing monitoring metrics is running properly

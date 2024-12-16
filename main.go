@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/liushun-ing/integrated_exporter/cmd"
-	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/cmd"
+	"github.com/liushunking/integrated_exporter/config"
 )
 
 const (
-	APP       = "github.com/liushun-ing/integrated_exporter"
+	APP       = "integrated_exporter"
 	VERSION   = "1.0.0"
 	EnvPrefix = "INTEGRATEDEXPORTER"
 )

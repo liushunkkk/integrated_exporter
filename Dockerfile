@@ -17,9 +17,9 @@ COPY dist/integrated_exporter_linux_amd64_v1/integrated_exporter /dist/integrate
 COPY dist/integrated_exporter_linux_arm64_v8.0/integrated_exporter /dist/integrated_exporter_linux_arm64/integrated_exporter
 
 RUN if [ `go env GOARCH` = "amd64" ]; then \
-      cp /dist/integrated_exporter_linux_amd64/integrated_exporter /usr/local/bin/integrated_exporter; \
+      cp /dist/integrated_exporter_linux_amd64/integrated_exporter ./integrated_exporter; \
     elif [ `go env GOARCH` = "arm64" ]; then \
-      cp /dist/integrated_exporter_linux_arm64/integrated_exporter /usr/local/bin/integrated_exporter; \
+      cp /dist/integrated_exporter_linux_arm64/integrated_exporter ./integrated_exporter; \
     fi
 
 RUN apk update --no-cache \
@@ -28,4 +28,16 @@ RUN apk update --no-cache \
   && rm -rf /go/pkg/mod \
   && rm -rf /go/pkg/sumdb
 
-ENTRYPOINT ["integrated_exporter"]
+COPY etc/etc.yaml ./etc/etc.yaml
+COPY etc/.env.yaml ./etc/.env.yaml
+
+EXPOSE 6070
+
+ENTRYPOINT ["./integrated_exporter",
+    "--port=6070",
+    "--interval=5s",
+    "--route=/metrics",
+    "--config=./etc/config.yaml",
+    "--env=./etc/env.yaml",
+    "--machineConfig.metrics=cpu,memory,disk,process,network",
+    "--machineConfig.mounts=/"]

@@ -1,4 +1,4 @@
-module github.com/liushun-ing/integrated_exporter
+module github.com/liushunking/integrated_exporter
 
 go 1.22.0
 

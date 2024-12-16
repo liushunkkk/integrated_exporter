@@ -5,7 +5,7 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/liushun-ing/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/config"
 )
 
 var versionCmd = &cobra.Command{

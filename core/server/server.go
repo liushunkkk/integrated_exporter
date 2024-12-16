@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/liushun-ing/integrated_exporter/config"
-	"github.com/liushun-ing/integrated_exporter/pkg/metricx"
+	"github.com/liushunking/integrated_exporter/config"
+	"github.com/liushunking/integrated_exporter/pkg/metricx"
 )
 
 // Run start the integrated exporter. If registry or handler is nil, it uses the default one.
