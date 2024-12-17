@@ -107,7 +107,7 @@ touch etc/etc.yaml
 # 如果需要，可以编写环境变量配置文件
 touch etc/.env.yaml
 # 也支持传入制定的文件
-integrated_exporter server --config=/path/to/your/config.yaml
+integrated_exporter server --config=/path/to/your/etc.yaml
 ```
 
 3、启动程序
@@ -124,7 +124,7 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 ```sh
 # 下载包
-curl -L -o integrated_exporter.tar.gz https://github.com/liushunking/integrated_exporter/releases/download/v0.1.0/integrated_exporter_Darwin_arm64.tar.gz
+curl -L -o integrated_exporter.tar.gz https://github.com/liushunking/integrated_exporter/releases/download/v0.1.1/integrated_exporter_Darwin_arm64.tar.gz
 # 解压
 tar -xzvf release-package.tar.gz
 # 运行
@@ -159,10 +159,10 @@ touch etc/etc.yaml
 # 如果需要，可以编写环境变量配置文件
 touch etc/.env.yaml
 docker pull ghcr.io/liushunking/integrated_exporter:latest
-docker run -d -p 6070:6070 -v running_dir/etc:/etc --name integrated_exporter ghcr.io/liushunking/integrated_exporter
+docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporter ghcr.io/liushunking/integrated_exporter
 # or 
 docker pull liushun311/integrated_exporter:latest
-docker run -d -p 6070:6070 -v running_dir/etc:/etc --name integrated_exporter liushun311/integrated_exporter
+docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporter liushun311/integrated_exporter
 ```
 
 
