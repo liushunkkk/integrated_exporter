@@ -11,9 +11,9 @@ before:
 
 builds:
   - env:
-      - CGO_ENABLED=0
-#    gcflags:
-#      - 'all=-N -l'
+      - CGO_ENABLED=1
+    gcflags:
+      - 'all=-N -l'
     goos:
       - linux
       - windows
