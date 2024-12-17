@@ -9,7 +9,7 @@ on:
 jobs:
   golangci:
     name: ci
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - name: Checkout # 获取源码
         uses: actions/checkout@v4
