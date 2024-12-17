@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"time"
 
 	"github.com/spf13/cobra"
@@ -18,6 +19,7 @@ var serverCmd = &cobra.Command{
 	PreRunE: func(cmd *cobra.Command, args []string) error {
 		interval, err := time.ParseDuration(config.C.Server.Interval)
 		if err != nil {
+			log.Printf("Error parsing interval '%s' for config.C.Server.Interval: %v", config.C.Server.Interval, err)
 			return err
 		}
 		for _, service := range config.C.Server.HttpServices {
