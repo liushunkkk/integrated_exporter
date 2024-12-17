@@ -13,8 +13,8 @@ builds:
   -
 #    env:
 #      - CGO_ENABLED=0
-#    gcflags:
-#      - 'all=-N -l'
+    gcflags:
+      - 'all=-N -l'
     goos:
       - linux
       - windows
