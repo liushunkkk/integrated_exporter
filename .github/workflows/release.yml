@@ -23,7 +23,7 @@ jobs:
         with:
           go-version: '1.22.5'
 
-      - name: Set up Docker # macos 没有预装 docker
+      - name: Set up Docker # macos 没有预装 docker，且只支持 macos-13
         uses: docker/setup-docker-action@v4
         env:
           LIMA_START_ARGS: --cpus 4 --memory 8
