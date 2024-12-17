@@ -120,9 +120,14 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 #### 无 go 环境
 
-可以根据系统自行下载[对应的 release 包](https://github.com/liushunking/integrated_exporter/releases)，然后执行：
+可以根据系统自行下载[对应的 release 包](https://github.com/liushunking/integrated_exporter/releases)，然后执行（下面是mac的样例）：
 
 ```sh
+# 下载包
+curl -L -o integrated_exporter.tar.gz https://github.com/liushunking/integrated_exporter/releases/download/v1.0.1/integrated_exporter_Darwin_arm64.tar.gz
+# 解压
+tar -xzvf release-package.tar.gz
+# 运行
 ./integrated_exporter server
 # 同样的，如果有需要可以设置配置文件，或者传入 flags，比如：
 ./integrated_exporter server --port=6666 --route=/prometheus/metrics
