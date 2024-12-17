@@ -1,5 +1,5 @@
 run:
-  go: '1.22.5'
+  go: '1.23.4'
 linters:
   enable:
     - thelper
@@ -13,7 +13,7 @@ linters-settings:
   gofumpt:
     # Module path which contains the source code being formatted.
     # Default: ""
-    module-path: github.com/liushun-ing/integrated_exporter
+    module-path: github.com/liushunking/integrated_exporter
     # Choose whether to use the extra rules.
     # Default: false
     extra-rules: true
