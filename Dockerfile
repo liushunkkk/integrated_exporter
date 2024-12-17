@@ -43,9 +43,5 @@ EXPOSE 6070
 ENTRYPOINT ["./integrated_exporter", \
             "server", \
             "--port=6070", \
-            "--interval=5s", \
-            "--route=/metrics", \
-            "--config=./etc/config.yaml", \
-            "--env=./etc/env.yaml", \
-            "--machineConfig.metrics=cpu,memory,disk,process,network", \
-            "--machineConfig.mounts=/"]
+            "--config=./etc/etc.yaml", \
+            "--env=./etc/.env.yaml"]
