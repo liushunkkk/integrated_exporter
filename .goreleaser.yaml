@@ -10,8 +10,9 @@ before:
     - go mod tidy
 
 builds:
-  - env:
-      - CGO_ENABLED=1
+  -
+#    env:
+#      - CGO_ENABLED=0
     gcflags:
       - 'all=-N -l'
     goos:
