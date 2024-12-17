@@ -2,7 +2,7 @@
 FROM golang:alpine
 
 # Set environment variables
-#ENV CGO_ENABLED=0
+ENV CGO_ENABLED=0
 
 # Add image metadata
 LABEL org.opencontainers.image.title="integrated_exporter" \
