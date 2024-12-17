@@ -1,6 +1,6 @@
 # Integrated Exporter
 
-对标`Prometheus`的集成监控程序：
+对标`Prometheus`的集成监控程序，集机器监控，服务监控指标合并，服务探测于一体，使多服务的指标监控更简单：
 
 - 在项目内引入，轻松创建各类监控指标：
   - Counter
@@ -22,7 +22,7 @@
   - 有监控指标的`API`服务：配置指标地址，生成`live_status`指标，并合并`API`服务的指标
   - 有监控指标的`Geth`服务：配置指标地址，生成`live_status`指标，并合并`Geth`服务的指标
 
-> **Attention：如果不配置服务列表，默认情况下是个简单版本的`Node Exporter`.**
+> **Attention：如果不配置服务列表，默认情况下是个简易版本的`Node Exporter`.**
 
 
 
@@ -33,7 +33,7 @@
 1、引入包
 
 ```shell
-go get github.com/liushunking/integrated_exporter@v1.0.0
+go get github.com/liushunking/integrated_exporter@latest
 ```
 
 2、创建配置，并启动程序
@@ -92,7 +92,7 @@ histogram.Observe(15)
 1、下载程序
 
 ```shell
-go install github.com/liushunking/integrated_exporter@v1.0.0
+go install github.com/liushunking/integrated_exporter@latest
 ```
 
 2、创建配置文件（如果需要）
@@ -124,7 +124,7 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 ```sh
 # 下载包
-curl -L -o integrated_exporter.tar.gz https://github.com/liushunking/integrated_exporter/releases/download/v1.0.1/integrated_exporter_Darwin_arm64.tar.gz
+curl -L -o integrated_exporter.tar.gz https://github.com/liushunking/integrated_exporter/releases/download/v0.1.0/integrated_exporter_Darwin_arm64.tar.gz
 # 解压
 tar -xzvf release-package.tar.gz
 # 运行
