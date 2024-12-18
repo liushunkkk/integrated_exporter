@@ -7,9 +7,9 @@ ENV CGO_ENABLED=0
 # Add image metadata
 LABEL org.opencontainers.image.title="integrated_exporter" \
       org.opencontainers.image.description="Integrated Exporter" \
-      org.opencontainers.image.url="https://github.com/liushunking/integrated_exporter" \
-      org.opencontainers.image.documentation="https://github.com/liushunking/integrated_exporter#readme" \
-      org.opencontainers.image.source="https://github.com/liushunking/integrated_exporter" \
+      org.opencontainers.image.url="https://github.com/liushunkkk/integrated_exporter" \
+      org.opencontainers.image.documentation="https://github.com/liushunkkk/integrated_exporter#readme" \
+      org.opencontainers.image.source="https://github.com/liushunkkk/integrated_exporter" \
       org.opencontainers.image.licenses="Apache-2.0 license" \
       maintainer="liushun <liushun0311@zju.edu.cn>"
 

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/liushunking/integrated_exporter/cmd"
-	"github.com/liushunking/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/cmd"
+	"github.com/liushunkkk/integrated_exporter/config"
 )
 
 const (

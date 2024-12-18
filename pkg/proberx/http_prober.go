@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/liushunking/integrated_exporter/config"
-	"github.com/liushunking/integrated_exporter/pkg/constantx"
+	"github.com/liushunkkk/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/pkg/constantx"
 )
 
 // ProbeHttp detect whether an HTTP service is running properly.

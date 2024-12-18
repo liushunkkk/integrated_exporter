@@ -68,5 +68,5 @@ jobs:
           tags: |
             liushun311/integrated_exporter:latest
             liushun311/integrated_exporter:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/liushunking/integrated_exporter:latest
-            ghcr.io/liushunking/integrated_exporter:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/liushunkkk/integrated_exporter:latest
+            ghcr.io/liushunkkk/integrated_exporter:${{ steps.get_version.outputs.VERSION }}

@@ -33,7 +33,7 @@
 1、引入包
 
 ```shell
-go get github.com/liushunking/integrated_exporter@latest
+go get github.com/liushunkkk/integrated_exporter@latest
 ```
 
 2、创建配置，并启动程序
@@ -92,7 +92,7 @@ histogram.Observe(15)
 1、下载程序
 
 ```shell
-go install github.com/liushunking/integrated_exporter@latest
+go install github.com/liushunkkk/integrated_exporter@latest
 ```
 
 2、创建配置文件（如果需要）
@@ -120,11 +120,11 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 #### 无 go 环境
 
-可以根据系统自行下载[对应的 release 包](https://github.com/liushunking/integrated_exporter/releases)，然后执行（下面是mac的样例）：
+可以根据系统自行下载[对应的 release 包](https://github.com/liushunkkk/integrated_exporter/releases)，然后执行（下面是mac的样例）：
 
 ```sh
 # 下载包
-curl -L -o integrated_exporter.tar.gz https://github.com/liushunking/integrated_exporter/releases/download/v0.1.1/integrated_exporter_Darwin_arm64.tar.gz
+curl -L -o integrated_exporter.tar.gz https://github.com/liushunkkk/integrated_exporter/releases/download/v0.1.1/integrated_exporter_Darwin_arm64.tar.gz
 # 解压
 tar -xzvf release-package.tar.gz
 # 运行
@@ -140,8 +140,8 @@ tar -xzvf release-package.tar.gz
 使用默认配置
 
 ```sh
-docker pull ghcr.io/liushunking/integrated_exporter:latest
-docker run -d -p 6070:6070 --name integrated_exporter ghcr.io/liushunking/integrated_exporter
+docker pull ghcr.io/liushunkkk/integrated_exporter:latest
+docker run -d -p 6070:6070 --name integrated_exporter ghcr.io/liushunkkk/integrated_exporter
 # or 
 docker pull liushun311/integrated_exporter:latest
 docker run -d -p 6070:6070 --name integrated_exporter liushun311/integrated_exporter
@@ -158,8 +158,8 @@ mkdir etc
 touch etc/etc.yaml
 # 如果需要，可以编写环境变量配置文件
 touch etc/.env.yaml
-docker pull ghcr.io/liushunking/integrated_exporter:latest
-docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporter ghcr.io/liushunking/integrated_exporter
+docker pull ghcr.io/liushunkkk/integrated_exporter:latest
+docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporter ghcr.io/liushunkkk/integrated_exporter
 # or 
 docker pull liushun311/integrated_exporter:latest
 docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporter liushun311/integrated_exporter
@@ -171,7 +171,7 @@ docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporte
 
 ### 配置项
 
-样例配置可以前往[`etc/etc.example.yaml`](https://github.com/liushunking/integrated_exporter/blob/main/etc/etc.example.yaml)文件查看.
+样例配置可以前往[`etc/etc.example.yaml`](https://github.com/liushunkkk/integrated_exporter/blob/main/etc/etc.example.yaml)文件查看.
 
 配置默认值如下：
 

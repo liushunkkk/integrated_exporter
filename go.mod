@@ -1,4 +1,4 @@
-module github.com/liushunking/integrated_exporter
+module github.com/liushunkkk/integrated_exporter
 
 go 1.23.4
 

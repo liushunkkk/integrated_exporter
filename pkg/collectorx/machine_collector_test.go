@@ -6,9 +6,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/liushunking/integrated_exporter/config"
-	"github.com/liushunking/integrated_exporter/pkg/constantx"
-	"github.com/liushunking/integrated_exporter/pkg/metricx"
+	"github.com/liushunkkk/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/pkg/constantx"
+	"github.com/liushunkkk/integrated_exporter/pkg/metricx"
 )
 
 func TestMachineCollector_Collect(t *testing.T) {

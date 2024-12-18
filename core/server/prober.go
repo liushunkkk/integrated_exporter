@@ -8,11 +8,11 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 
-	"github.com/liushunking/integrated_exporter/config"
-	"github.com/liushunking/integrated_exporter/pkg/collectorx"
-	"github.com/liushunking/integrated_exporter/pkg/constantx"
-	"github.com/liushunking/integrated_exporter/pkg/metricx"
-	"github.com/liushunking/integrated_exporter/pkg/proberx"
+	"github.com/liushunkkk/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/pkg/collectorx"
+	"github.com/liushunkkk/integrated_exporter/pkg/constantx"
+	"github.com/liushunkkk/integrated_exporter/pkg/metricx"
+	"github.com/liushunkkk/integrated_exporter/pkg/proberx"
 )
 
 func ProbeServices(config config.ServerConfig, registry *metricx.IRegistry, handler *MetricsHandler) {

@@ -9,10 +9,10 @@ import (
 	"github.com/shirou/gopsutil/v4/net"
 	"github.com/shirou/gopsutil/v4/process"
 
-	"github.com/liushunking/integrated_exporter/config"
-	"github.com/liushunking/integrated_exporter/pkg/constantx"
-	"github.com/liushunking/integrated_exporter/pkg/metricx"
-	"github.com/liushunking/integrated_exporter/pkg/stringx"
+	"github.com/liushunkkk/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/pkg/constantx"
+	"github.com/liushunkkk/integrated_exporter/pkg/metricx"
+	"github.com/liushunkkk/integrated_exporter/pkg/stringx"
 )
 
 type MachineCollector struct {

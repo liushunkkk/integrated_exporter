@@ -14,8 +14,8 @@ import (
 	"google.golang.org/grpc/credentials/insecure"
 	"google.golang.org/grpc/metadata"
 
-	"github.com/liushunking/integrated_exporter/config"
-	"github.com/liushunking/integrated_exporter/pkg/constantx"
+	"github.com/liushunkkk/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/pkg/constantx"
 )
 
 // ProbeGrpc detect whether a gRPC service is running properly.

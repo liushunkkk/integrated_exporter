@@ -7,9 +7,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	"github.com/liushunking/integrated_exporter/config"
-	"github.com/liushunking/integrated_exporter/core/server"
-	"github.com/liushunking/integrated_exporter/pkg/constantx"
+	"github.com/liushunkkk/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/core/server"
+	"github.com/liushunkkk/integrated_exporter/pkg/constantx"
 )
 
 // serverCmd represents the server command

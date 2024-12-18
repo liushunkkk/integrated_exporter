@@ -13,7 +13,7 @@ import (
 	"github.com/spf13/viper"
 	"gopkg.in/yaml.v3"
 
-	"github.com/liushunking/integrated_exporter/config"
+	"github.com/liushunkkk/integrated_exporter/config"
 )
 
 var (
