@@ -18,9 +18,10 @@ COPY dist/integrated_exporter_linux_amd64_v1/integrated_exporter /dist/integrate
 COPY dist/integrated_exporter_linux_arm64_v8.0/integrated_exporter /dist/integrated_exporter_linux_arm64/integrated_exporter
 
 # Select the appropriate binary based on the architecture
-RUN if [ "$(go env GOARCH)" = "amd64" ]; then \
+RUN ARCH=$(uname -m) && \
+    if [ "$ARCH" = "x86_64" ] || [ "$ARCH" = "amd64" ]; then \
       cp /dist/integrated_exporter_linux_amd64/integrated_exporter ./integrated_exporter; \
-    elif [ "$(go env GOARCH)" = "arm64" ]; then \
+    elif [ "$ARCH" = "arm64" ] || [ "$ARCH" = "aarch64" ]; then \
       cp /dist/integrated_exporter_linux_arm64/integrated_exporter ./integrated_exporter; \
     fi
 
