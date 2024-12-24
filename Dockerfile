@@ -1,8 +1,5 @@
-# Use official Golang image with Alpine for a lightweight base
-FROM golang:alpine
-
-# Set environment variables
-ENV CGO_ENABLED=0
+# Use official Alpine image for a lightweight base
+FROM alpine:latest
 
 # Add image metadata
 LABEL org.opencontainers.image.title="integrated_exporter" \
@@ -27,10 +24,9 @@ RUN if [ "$(go env GOARCH)" = "amd64" ]; then \
       cp /dist/integrated_exporter_linux_arm64/integrated_exporter ./integrated_exporter; \
     fi
 
-# Install dependencies and clean up
+# Install dependencies
 RUN apk update --no-cache \
-    && apk add --no-cache tzdata ca-certificates \
-    && rm -rf /dist /go/pkg/mod /go/pkg/sumdb
+    && apk add --no-cache tzdata ca-certificates
 
 # Copy configuration files
 COPY etc/etc.yaml ./etc/etc.yaml
