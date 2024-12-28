@@ -124,7 +124,7 @@ integrated_exporter server # 部分参数也支持 flags 传入
 
 ```sh
 # 下载包
-curl -L -o integrated_exporter.tar.gz https://github.com/liushunkkk/integrated_exporter/releases/download/v0.1.1/integrated_exporter_Darwin_arm64.tar.gz
+curl -L -o integrated_exporter.tar.gz https://github.com/liushunkkk/integrated_exporter/releases/download/v0.1.2/integrated_exporter_Darwin_arm64.tar.gz
 # 解压
 tar -xzvf release-package.tar.gz
 # 运行

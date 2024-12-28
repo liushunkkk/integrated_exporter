@@ -3,9 +3,7 @@
 ## etc.yaml
 
 - `APP`: app名字
-
 - `syntax[可选]`:  配置文件版本，一般为 V1 即可，暂时无用
-
 - `server`:
 
   - `port[可选]`:  数字，端口，默认为 `6070`
@@ -20,13 +18,12 @@
     - `address`: metrics地址，如`http://127.0.0.1:6060/metrics`
     - `token[可选]`: 验证请求头，如 `Bearer 123456`
     - `timeout`: 请求超时时间，超时时间不得超过采集间隔`interval`
-  -   `apiServices[可选]`: # 带metrics的后台服务
+  - `apiServices[可选]`: # 带metrics的后台服务
        - `name`: 服务名称
        - `address`: metrics地址
        - `token`: 验证请求头
        - `timeout`: 请求超时时间
-
-  -   `httpServices[可选]`: 使用 http 探针访问的 http 服务，将会产生 `服务名_live_status` 指标
+  - `httpServices[可选]`: 使用 http 探针访问的 http 服务，将会产生 `服务名_live_status` 指标
     - `name`: 服务名称
     - `address`:  请求接口地址，如 `http://127.0.0.1:8001/api/v1/user/list`
     - `method`: 请求方法，如 `GET`
@@ -34,7 +31,7 @@
     - `body[可选]`: 请求体，如 `'{"message": "hello"}'`
     - `response[可选]`: 字符串，response验证，验证方式：strings.Contains(接口返回体字符串，配置值)
     - `timeout`: 请求超时时间
-  -   `grpcServices[可选]`: 使用 grpc 探针访问的 grpc 服务
+  - `grpcServices[可选]`: 使用 grpc 探针访问的 grpc 服务
        - `name`: 服务名称
        - `address`: 请求地址，如 `127.0.0.1:8000`
        - `token`: 验证请求头
