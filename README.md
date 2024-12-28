@@ -171,21 +171,17 @@ docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporte
 
 ### 配置项
 
-样例配置可以前往[`etc/etc.example.yaml`](https://github.com/liushunkkk/integrated_exporter/blob/main/etc/etc.example.yaml)文件查看.
+样例配置可以前往[`etc/etc.example.yaml`](https://github.com/liushunkkk/integrated_exporter/blob/main/etc/etc.example.yaml)文件查看，也可以选择查看详细文档[CONFIG.md](https://github.com/liushunkkk/integrated_exporter/blob/main/CONFIG.md)。
 
-配置默认值如下：
-
-- Port: `6070`
-- Route: `/metrics`
-- Interval: `5s`
-- MachineConfig:
-  - Metrics: `[ cpu,memory,disk,process,network ]`
-  - Mounts: `[ / ]`
-- GethServices: `nil`
-- ApiServices: `nil`
-- HttpServices: `nil`
-- GrpcServices: `nil`
-- ProcessServices: `nil`
+> 注意：
+> 服务名不支持 `-` 拼接单词, 推荐使用驼峰形式。且为了防止指标冲突，请保证服务名是唯一的。
+>
+> ```yaml
+> apiServices:
+>   - name: portalApi // 推荐
+> apiServices:
+>   - name: portal-api // 不支持
+> ```
 
 
 
@@ -195,3 +191,10 @@ docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporte
 - 在机器环境变量中设置以 `{EnvPrefix}_` 开头的变量，如 `{ENV_PREFIX}_A_B` 将映射到 `config.C.a.b`.
 - 默认`EnvPrefix`为`INTEGRATEDEXPORTER`
 
+
+
+### 指标设计
+
+- 机器指标均以`machine`开头，如`machine_cpu_used`，`machine_mem_total`
+- 探针存活服务状态暴露为`服务名_live_status`
+- 请求到的其他程序的metrics，将会添加`servicename=服务名`标签以作区分，并且也会添加`服务名_live_status`作为服务状态指标
