@@ -173,6 +173,8 @@ docker run -d -p 6070:6070 -v running_dir/etc:/app/etc --name integrated_exporte
 
 样例配置可以前往[`etc/etc.example.yaml`](https://github.com/liushunkkk/integrated_exporter/blob/main/etc/etc.example.yaml)文件查看，也可以选择查看详细文档[CONFIG.md](https://github.com/liushunkkk/integrated_exporter/blob/main/CONFIG.md)。
 
+[这里](https://github.com/liushunkkk/integrated_exporter/blob/main/CONFIG.md#%E5%8C%BA%E5%9D%97%E9%93%BE%E8%8A%82%E7%82%B9%E5%8F%82%E8%80%83%E9%85%8D%E7%BD%AE)给出了一个区块链节点的参考配置。
+
 > 注意：
 > 服务名不支持 `-` 拼接单词, 推荐使用驼峰形式。且为了防止指标冲突，请保证服务名是唯一的。
 >
